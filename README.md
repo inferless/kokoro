@@ -1,4 +1,4 @@
-# Tutorial - Deploy Qwen2.5-Omni-7B using Inferless
+# Inferless Template - Deploy Kokoro using Inferless
 [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) is an open-source, lightweight text-to-speech (TTS) model that delivers high-quality voice synthesis while maintaining a compact size of just 82 million parameters. Built on the StyleTTS2 and ISTFTNet architectures, Kokoro-82M operates efficiently without relying on diffusion models or encoders, enabling fast and resource-friendly inference. This makes it suitable for deployment on a wide range of systems.
 
 ### Fork the Repository
