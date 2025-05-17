@@ -1,6 +1,0 @@
-build:
-  system_packages:
-    - espeak-ng
-  python_packages:
-    - kokoro==0.9.4
-    - soundfile==0.13.1
