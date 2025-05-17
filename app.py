@@ -16,9 +16,9 @@ class RequestObjects(BaseModel):
 
 @inferless.response
 class ResponseObjects(BaseModel):
-    audio_base64: List[str] = []
-    graphemes: List[str] = []
-    phonemes: List[str] = []
+    audio_base64: List[str] = Field(default="Test output")
+    graphemes: List[str] = Field(default="Test output")
+    phonemes: List[str] = Field(default="Test output")
 
 class InferlessPythonModel:
     def initialize(self):
