@@ -12,7 +12,7 @@ INPUT_SCHEMA = {
         'example': ["af_heart"]
     },
     "speed": {
-        'datatype': 'FP32',
+        'datatype': 'FP64',
         'required': False,
         'shape': [1],
         'example': [1.0]
