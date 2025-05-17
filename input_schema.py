@@ -11,12 +11,6 @@ INPUT_SCHEMA = {
         'shape': [1],
         'example': ["af_heart"]
     },
-    "speed": {
-        'datatype': 'FP64',
-        'required': False,
-        'shape': [1],
-        'example': [1.0]
-    },
     "split_pattern": {
         'datatype': 'STRING',
         'required': False,
