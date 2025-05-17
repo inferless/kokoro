@@ -16,13 +16,12 @@ class RequestObjects(BaseModel):
 
 @inferless.response
 class ResponseObjects(BaseModel):
-    audio_base64: List[str] = Field(default_factory=list, description="List of base64-encoded audio segments.")
-    graphemes: List[str] = Field(default_factory=list)
-    phonemes: List[str] = Field(default_factory=list)
+    audio_base64: List[str] = []
+    graphemes: List[str] = []
+    phonemes: List[str] = []
 
 class InferlessPythonModel:
     def initialize(self):
-        # Load the pipeline only once during initialization
         self.pipeline = KPipeline(lang_code='a')
 
     def infer(self, request: RequestObjects) -> ResponseObjects:
@@ -38,12 +37,9 @@ class InferlessPythonModel:
         phonemes = []
 
         for gs, ps, audio in generator:
-            # Convert audio array to bytes using BytesIO buffer
             buffer = io.BytesIO()
             sf.write(buffer, audio, samplerate=24000, format='WAV')
             audio_bytes = buffer.getvalue()
-
-            # Encode audio bytes to base64
             audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
             
             audio_base64_list.append(audio_base64)
