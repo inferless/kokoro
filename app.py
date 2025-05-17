@@ -1,0 +1,60 @@
+import torch
+import soundfile as sf
+from kokoro import KPipeline
+from pydantic import BaseModel, Field
+from typing import Optional, List
+import inferless
+import base64
+import io
+
+@inferless.request
+class RequestObjects(BaseModel):
+    text: str = Field(default="Hello world, this is a test.")
+    voice: Optional[str] = Field(default="af_heart")
+    speed: Optional[float] = Field(default=1.0, description="Speech speed.")
+    split_pattern: Optional[str] = Field(default=r'\n+', description="Pattern to split text into segments.")
+
+@inferless.response
+class ResponseObjects(BaseModel):
+    audio_base64: List[str] = Field(default_factory=list, description="List of base64-encoded audio segments.")
+    graphemes: List[str] = Field(default_factory=list)
+    phonemes: List[str] = Field(default_factory=list)
+
+class InferlessPythonModel:
+    def initialize(self):
+        # Load the pipeline only once during initialization
+        self.pipeline = KPipeline(lang_code='a')
+
+    def infer(self, request: RequestObjects) -> ResponseObjects:
+        generator = self.pipeline(
+            request.text,
+            voice=request.voice,
+            speed=request.speed,
+            split_pattern=request.split_pattern
+        )
+
+        audio_base64_list = []
+        graphemes = []
+        phonemes = []
+
+        for gs, ps, audio in generator:
+            # Convert audio array to bytes using BytesIO buffer
+            buffer = io.BytesIO()
+            sf.write(buffer, audio, samplerate=24000, format='WAV')
+            audio_bytes = buffer.getvalue()
+
+            # Encode audio bytes to base64
+            audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
+            
+            audio_base64_list.append(audio_base64)
+            graphemes.append(gs)
+            phonemes.append(ps)
+
+        return ResponseObjects(
+            audio_base64=audio_base64_list,
+            graphemes=graphemes,
+            phonemes=phonemes
+        )
+
+    def finalize(self):
+        self.pipeline = None
