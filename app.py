@@ -10,9 +10,9 @@ import io
 @inferless.request
 class RequestObjects(BaseModel):
     text: str = Field(default="Hello world, this is a test.")
-    voice: Optional[str] = Field(default="af_heart")
-    speed: Optional[float] = Field(default=1.0, description="Speech speed.")
-    split_pattern: Optional[str] = Field(default=r'\n+', description="Pattern to split text into segments.")
+    voice: Optional[str] = "af_heart"
+    speed: Optional[float] = 1.0
+    split_pattern: Optional[str] = r'\n+'
 
 @inferless.response
 class ResponseObjects(BaseModel):
