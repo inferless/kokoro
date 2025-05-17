@@ -25,11 +25,12 @@ class InferlessPythonModel:
         phonemes = []
 
         for gs, ps, audio in generator:
+            sample_rate = 24000
             buffer = io.BytesIO()
-            sf.write(buffer, audio, samplerate=24000, format='WAV')
-            audio_bytes = buffer.getvalue()
-            audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
-            stream_output_handler.send_streamed_output({"generated_audio" : audio_base64})
+            sf.write(buffer, audio, sample_rate, format='WAV')
+            buffer.seek(0)
+            base64_audio = base64.b64encode(buffer.read()).decode('utf-8')
+            stream_output_handler.send_streamed_output({"generated_audio": base64_audio})
             
         stream_output_handler.finalise_streamed_output()
 
