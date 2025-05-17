@@ -24,3 +24,4 @@ INPUT_SCHEMA = {
         'example': ["\n+"]
     }
 }
+IS_STREAMING_OUTPUT = True
