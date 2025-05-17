@@ -5,3 +5,4 @@ build:
     - kokoro==0.9.4
     - soundfile==0.13.1
     - inferless==0.2.14
+    - pydantic==2.10.2
