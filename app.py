@@ -11,13 +11,13 @@ class InferlessPythonModel:
     def infer(self, inputs, stream_output_handler):
         text = inputs['text']
         voice = inputs.get("voice","af_heart")
-        speed = inputs.get("speed",1.0)
+        # speed = inputs.get("speed",1.0)
         split_pattern = inputs.get("split_pattern",'\n+')
         
         generator = self.pipeline(
             text,
             voice=voice,
-            speed=speed,
+            speed=1.0,
             split_pattern=split_pattern
         )
         audio_base64_list = []
