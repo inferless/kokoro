@@ -29,14 +29,11 @@ curl --location '<your_inference_url>' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <your_api_key>' \
     --data '{
-      "inputs": [
-                  {
-                        "name": "text",
-                        "shape": [1],
-                        "data": ["Hello world, this is a test."],
-                        "datatype": "BYTES"
-                      }
-    ]
+    "parameters": {
+        "text": "The sky above the port was the color of television, tuned to a dead channel.",
+        "voice": "af_heart",
+        "split_pattern": "\n+"
+    }
 }'
 ```
 
