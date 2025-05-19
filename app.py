@@ -30,7 +30,9 @@ class InferlessPythonModel:
             sf.write(buffer, audio, sample_rate, format='WAV')
             buffer.seek(0)
             base64_audio = base64.b64encode(buffer.read()).decode('utf-8')
-            stream_output_handler.send_streamed_output({"generated_audio": base64_audio})
+            output_dict = {}
+            output_dict["OUT"] = base64_audio
+            stream_output_handler.send_streamed_output(output_dict)
             
         stream_output_handler.finalise_streamed_output()
 
