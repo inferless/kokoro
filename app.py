@@ -15,11 +15,11 @@ class InferlessPythonModel:
             text = "The sky above the port was the color of television, tuned to a dead channel"
             print(inputs['text'],flush=True)
             
-            voice = inputs.get("voice","af_heart")
-            print(voice,flush=True)
+            # voice = inputs.get("voice","af_heart")
+            # print(voice,flush=True)
 
-            split_pattern = inputs.get("split_pattern",'\n+')
-            print(split_pattern,flush=True)
+            # split_pattern = inputs.get("split_pattern",'\n+')
+            # print(split_pattern,flush=True)
 
             # Hard Coding
             voice = "af_heart"
