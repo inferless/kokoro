@@ -30,22 +30,20 @@ curl --location '<your_inference_url>' \
     --header 'Authorization: Bearer <your_api_key>' \
     --data '{
     "parameters": {
-        "text": "The sky above the port was the color of television, tuned to a dead channel.",
-        "voice": "af_heart",
-        "split_pattern": "\n+"
+            "text": "The sky above the port was the color of television, tuned to a dead channel.",
+            "voice": "af_heart",
+            "split_pattern": "\n+"
     }
 }'
 ```
 
 ---
 ## Customizing the Code
-Open the `app.py` file. This contains the main code for inference. The `InferlessPythonModel` has three main functions, initialize, infer and finalize.
+Open the `app.py` file. This contains the main code for inference. It has three main functions, initialize, infer and finalize.
 
 **Initialize** -  This function is executed during the cold start and is used to initialize the model. If you have any custom configurations or settings that need to be applied during the initialization, make sure to add them in this function.
 
-**Infer** - This function is where the inference happens. The infer function leverages both RequestObjects and ResponseObjects to handle inputs and outputs in a structured and maintainable way.
-- RequestObjects: Defines the input schema, validating and parsing the input data.
-- ResponseObjects: Encapsulates the output data, ensuring consistent and structured API responses.
+**Infer** - This function is where the inference happens. The argument to this function `inputs`, is a dictionary containing all the input parameters. The keys are the same as the name given in inputs. Refer to [input](https://docs.inferless.com/model-import/input-output-schema) for more.
 
 **Finalize** - This function is used to perform any cleanup activity for example you can unload the model from the gpu by setting to `None`.
 
