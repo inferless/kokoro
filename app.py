@@ -39,7 +39,7 @@ class InferlessPythonModel:
                 
             stream_output_handler.finalise_streamed_output()
 
-        except e as Exception:
+        except Exception as e:
             print(e,flush=True)
             
     def finalize(self):
